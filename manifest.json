@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Kokoro Reader",
+  "version": "0.2.0",
+  "description": "Select text and click the Read button to have it read aloud by the Kokoro TTS model, running fully locally in your browser.",
+  "permissions": ["offscreen", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Kokoro Hover Reader"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "cross_origin_embedder_policy": { "value": "require-corp" },
+  "cross_origin_opener_policy": { "value": "same-origin" }
+}
